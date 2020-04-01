@@ -1,0 +1,24 @@
+{
+  "name": "@react-native-kotlin/core",
+  "version": "1.0.0",
+  "description": "Core registry for react-native-kotlin packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhdeck/react-native-kotlin-core.git"
+  },
+  "keywords": [
+    "react-native",
+    "android",
+    "kotlin"
+  ],
+  "author": "Ray Deck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhdeck/react-native-kotlin-core/issues"
+  },
+  "homepage": "https://github.com/rhdeck/react-native-kotlin-core#readme"
+}
