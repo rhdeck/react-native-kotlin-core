@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/rhdeck/react-native-kotlin-core/issues"
   },
-  "homepage": "https://github.com/rhdeck/react-native-kotlin-core#readme"
+  "homepage": "https://github.com/rhdeck/react-native-kotlin-core#readme",
+  "devDependencies": {
+    "react-native-android-studio": "^2.0.0"
+  }
 }
