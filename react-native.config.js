@@ -6,6 +6,7 @@ const {
   unlinkSync,
   renameSync,
 } = require("fs");
+const promote = require("promote-peer-dependencies");
 const { join } = require("path");
 const { sync: glob } = require("glob");
 module.exports = {
@@ -14,6 +15,7 @@ module.exports = {
       name: "kotlin-link",
       description: "Initialize react-native-kotlin configuration and packages",
       func: () => {
+        promote(process.cwd());
         //replace MainApplication.java
         const maPaths = glob(
           join(
@@ -29,13 +31,15 @@ module.exports = {
         const maPath = maPaths[0];
         const txt = readFileSync(maPath, { encoding: "utf8" });
         if (!txt.includes("RNKPackage")) {
+          const lines = txt.split("\n");
+          const packageLine = lines.find((line) => line.includes("package "));
           const templatePath = join(
             __dirname,
             "templates",
             "MainApplication.java"
           );
-          unlinkSync(maPath);
-          copyFileSync(templatePath, maPath);
+          const maTemplate = readFileSync(templatePath, { encoding: "utf8" });
+          writeFileSync(maPath, [packageLine, maTemplate].join("\n"));
         }
 
         const macPaths = glob(

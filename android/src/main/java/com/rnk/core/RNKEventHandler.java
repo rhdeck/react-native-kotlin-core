@@ -1,6 +1,6 @@
-package com.rnk.core
+package com.rnk.core;
 
 @FunctionalInterface
-public interface EventHandler {
+public interface RNKEventHandler {
     boolean execute(Object data);
 }

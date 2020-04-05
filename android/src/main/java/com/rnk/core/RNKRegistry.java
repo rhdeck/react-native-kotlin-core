@@ -19,7 +19,10 @@ public class RNKRegistry {
     }
     protected Map<String, RNKEventHandler> getKeys(String event) {
         Map<String, RNKEventHandler> thisEvents = events.get(event);
-        if(thisEvents == null) thisEvents = new HashMap<String, RNKEventHandler>();
+        if(thisEvents == null) {
+            thisEvents = new HashMap<String, RNKEventHandler>();
+            events.put(event, thisEvents);
+        }
         return thisEvents;
     }
     public void add(String event, String key, RNKEventHandler func) {
@@ -32,7 +35,6 @@ public class RNKRegistry {
     }
     public Boolean trigger(String event, Object data) {
         Map<String, RNKEventHandler> thisEvents = getKeys(event);
-        thisEvents = getKeys(event);
         for(Map.Entry<String, RNKEventHandler> entry: thisEvents.entrySet()){
             boolean temp = entry.getValue().execute(data);
             if(temp == false) return false;

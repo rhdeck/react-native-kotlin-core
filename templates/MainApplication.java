@@ -1,4 +1,3 @@
-package com.rnktest8;
 
 import android.app.Application;
 import android.content.Context;
@@ -62,10 +61,10 @@ public class MainApplication extends Application implements ReactApplication {
       for (ReactPackage pk : packages) {
           if (pk instanceof RNKPackageInterface) {
               RNKPackageInterface p = (RNKPackageInterface) pk;
-              RNKRegistry.instance.registerPackage(p);
+              RNKRegistry.getInstance().registerPackage(p);
           }
       }
-      RNKRegistry.instance.trigger("application.create");
+      RNKRegistry.getInstance().trigger("application.create");
 
 
     SoLoader.init(this, /* native exopackage */ false);

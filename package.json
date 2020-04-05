@@ -25,6 +25,7 @@
     "react-native": "^0.62.1"
   },
   "dependencies": {
-    "glob": "^7.1.6"
+    "glob": "^7.1.6",
+    "promote-peer-dependencies": "^1.6.1"
   }
 }
