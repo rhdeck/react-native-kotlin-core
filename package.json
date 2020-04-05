@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "glob": "^7.1.6",
-    "promote-peer-dependencies": "^1.6.1"
+    "promote-peer-dependencies": "^1.6.1",
+    "yarnif": "^1.4.0"
   }
 }

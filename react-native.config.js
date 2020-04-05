@@ -9,13 +9,14 @@ const {
 const promote = require("promote-peer-dependencies");
 const { join } = require("path");
 const { sync: glob } = require("glob");
+const yarnif = require("yarnif");
 module.exports = {
   commands: [
     {
       name: "kotlin-link",
       description: "Initialize react-native-kotlin configuration and packages",
       func: () => {
-        promote(process.cwd());
+        if (promote(process.cwd())) yarnif.install();
         //replace MainApplication.java
         const maPaths = glob(
           join(
