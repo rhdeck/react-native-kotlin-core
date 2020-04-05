@@ -1,35 +1,50 @@
-package com.rnk.core
-class RNKRegistry {
-    static RNKRegistry instance = RNKRegistry();
-    Map<String, Object> data = new Map();
-    Map<String, <String, ()->Boolean>> events = new Map();
-    public void registerPackage(RNKPackage package) {
-        package.createEventManagers(this)
+package com.rnk.core;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@FunctionalInterface
+interface EventHandler {
+    boolean execute(Object data);
+}
+public class RNKRegistry {
+    public static RNKRegistry instance = new RNKRegistry();
+    public static RNKRegistry getInstance() { return instance; }
+    Map<String, Object> data = new HashMap<String, Object>();
+    Map<String, Map<String, EventHandler>> events = new HashMap<String, Map<String, EventHandler>>();
+    public void registerPackage(RNKPackageInterface p) {
+        p.createEventManagers(this);
     }
-    public Object getData(String key) = {
-        return data.get(key)
+    public Object get(String key) {
+        return data.get(key);
     }
-    public void setData(String key, Object value) {
-        data.put(key, value)
+    public void set(String key, Object value) {
+        data.put(key, value);
     }
-    protected Map<String, ()->Boolean> getKeys(String event) {
-        Map<String, ()->Void> thisEvents = events.get(event)
-        if(thisEvents == null) thisEvents = new Map()
+    protected Map<String, EventHandler> getKeys(String event) {
+        Map<String, EventHandler> thisEvents = events.get(event);
+        if(thisEvents == null) thisEvents = new HashMap<String, EventHandler>();
         return thisEvents;
     }
-    public void addEvent(String event, String key, (data)->Boolean func) {
-        thisEvents = getKeys(event)
+    public void add(String event, String key, EventHandler func) {
+        Map<String, EventHandler> thisEvents = getKeys(event);
         thisEvents.put(key, func);
     }
-    public void removeEvent(String event, String key) {
-       thisEvents = getKeys(event)
-        thisEvents.remove(key)
+    public void remove(String event, String key) {
+        Map<String, EventHandler> thisEvents = getKeys(event);
+        thisEvents.remove(key);
     }
-    public Boolean triggerEvent(String event, Object data) { Map<String, ()->Void> thisEvents = events.get(event)
-        thisEvents = getKeys(event)
-        for(Map.entry<String, ()->Void> entry: thisEvents.entrySet){
-            entry.value(data)
+    public Boolean trigger(String event, Object data) {
+        Map<String, EventHandler> thisEvents = getKeys(event);
+        thisEvents = getKeys(event);
+        for(Map.Entry<String, EventHandler> entry: thisEvents.entrySet()){
+            boolean temp = entry.getValue().execute(data);
+            if(temp == false) return false;
         }
+        return true;
+    }
+    public Boolean trigger(String event) {
+        return trigger(event, null);
     }
 
 }

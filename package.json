@@ -21,7 +21,10 @@
     "url": "https://github.com/rhdeck/react-native-kotlin-core/issues"
   },
   "homepage": "https://github.com/rhdeck/react-native-kotlin-core#readme",
-  "devDependencies": {
-    "react-native-android-studio": "^2.0.0"
+  "peerDependencies": {
+    "react-native": "^0.62.1"
+  },
+  "dependencies": {
+    "glob": "^7.1.6"
   }
 }
